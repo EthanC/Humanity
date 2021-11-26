@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "humanity"
+version = "1.0.0"
+description = "GetFiveDollars.com deal watcher that reports new deals via Discord."
+authors = ["Ethan C <16727756+EthanC@users.noreply.github.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+httpx = "^0.21.1"
+loguru = "^0.5.3"
+notifiers = "^1.2.1"
+markdownify = "^0.10.0"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.12.1"
+black = "^21.11b1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

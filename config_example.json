@@ -1,0 +1,15 @@
+{
+    "logging": {
+        "severity": "DEBUG",
+        "discord": {
+            "enable": true,
+            "severity": "WARNING",
+            "webhookUrl": "https://discord.com/api/webhooks/XXXXX/XXXXX"
+        }
+    },
+    "discord": {
+        "username": "Humanity",
+        "avatarUrl": "https://i.imgur.com/x5iJkUG.png",
+        "webhookUrl": "https://discord.com/api/webhooks/XXXXX/XXXXX"
+    }
+}
