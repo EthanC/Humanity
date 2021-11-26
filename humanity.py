@@ -27,6 +27,7 @@ class Humanity:
         Humanity.SetupLogging(self)
 
         self.changed: bool = False
+        self.quiet: bool = False
         self.history: Dict[str, Any] = Humanity.LoadHistory(self)
 
         Humanity.ProcessDeals(self)
@@ -100,6 +101,7 @@ class Humanity:
         except FileNotFoundError:
             history: Dict[str, Any] = {}
             self.changed = True
+            self.quiet = True
 
             logger.success("Deal history not found, created empty file")
         except Exception as e:
@@ -148,7 +150,9 @@ class Humanity:
         payload["title"] = deal["title"]
         payload["description"] = Utility.ConvertHTML(
             self,
-            deal["description"] + deal["form"]["description"],
+            deal["description"] + ""
+            if (p2 := deal.get("form", {}).get("description")) is None
+            else p2,
             4096,
             # Exclude common headings
             ["<h2>Requirements</h2>", "<h4>Requirements</h4>", "<h4>Submission</h4>"],
@@ -206,6 +210,11 @@ class Humanity:
         """Report deal updates to the configured Discord webhook."""
 
         settings: Dict[str, Any] = self.config["discord"]
+
+        if self.quiet is True:
+            logger.debug("Ignoring notify request due to newly formed history.json")
+
+            return True
 
         payload: Dict[str, Any] = {
             "username": settings["username"],
